@@ -13,7 +13,6 @@ const helpers = require("@nomicfoundation/hardhat-network-helpers");
 
 
 const DAI = "0x6B175474E89094C44Da98b954EedeAC495271d0F";
-const BAYC_ADDRESS = "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D";
 const AIRDROP_CLAIMER = "0xaAa2DA255DF9Ee74C7075bCB6D81f97940908A5D";
 
 describe("Airdrop Claim", function () {
@@ -30,7 +29,8 @@ describe("Airdrop Claim", function () {
     );
   
     const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true });
-    const rootHash = merkleTree.getHexRoot();
+    // const rootHash = merkleTree.getHexRoot();
+    const rootHash = "0x2386505d972f5a8e96f5ec1270b9ec22e399cc3655981edd7ee5bc8edf1d0744";
 
     const Airdrop = await hre.ethers.getContractFactory("Airdrop");
     const airdrop = await Airdrop.deploy(DAI, rootHash);
@@ -56,7 +56,14 @@ describe("Airdrop Claim", function () {
 
       const leaf = keccak256(ethers.solidityPacked(["address", "uint256"], [AIRDROP_CLAIMER, Claimamount]));
      
-      const proof = merkleTree.getHexProof(leaf);
+      // const proof = merkleTree.getHexProof(leaf);
+      const proof = [
+        '0x479919b0ec677d1d5ff04bba6d7f7c5ae579db0523c321f74bb5c7ecb4b0bebf',
+        '0xd9f6434e4a9834e8e0ccda9eae02cf63e04feeff96002323ee17ea7bb073569c',
+        '0x540cfc25d77baa5129daef6cb11fb218340bc5d27b372cdd446b32485ab48c69',
+        '0xff3a2998220cbc4c1e8d3bf250d11c1a36df2f19b7dd4607790937beff83647f'
+      ];
+      
 
       const claimTx = await airdrop.connect(impersonatedClaimer).claim(AIRDROP_CLAIMER, Claimamount, proof);
 

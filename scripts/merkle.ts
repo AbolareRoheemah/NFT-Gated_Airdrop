@@ -32,8 +32,8 @@ fs.createReadStream(csvFile)
 
     // Extracting proof for this address ["0xd9f6434e4a9834e8e0ccda9eae02cf63e04feeff96002323ee17ea7bb073569c","0x540cfc25d77baa5129daef6cb11fb218340bc5d27b372cdd446b32485ab48c69","0xff3a2998220cbc4c1e8d3bf250d11c1a36df2f19b7dd4607790937beff83647f"]
     const targetEntry = {
-        address: "0x483DcF0311b7B6Ca18284a5815Cc0F4E2F678Fa8",
-        amount: ethers.parseUnits("10", 18)
+        address: "0xaAa2DA255DF9Ee74C7075bCB6D81f97940908A5D",
+        amount: ethers.parseUnits("1", 18)
     }
     // const targetLeaf = leafNodesData(targetEntry)
     const leaf = keccak256(
